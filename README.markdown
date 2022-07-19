@@ -238,7 +238,7 @@ add this to your `Rakefile`.
 
 ```ruby
 require 'tasks/standalone_migrations'
-ActiveRecord::Base.schema_format = :sql
+ActiveRecord.schema_format = :sql
 ```
 
 You should see a `db/structure.sql` file the next time you run a
