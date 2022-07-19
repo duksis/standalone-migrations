@@ -31,8 +31,17 @@ module StandaloneMigrations
       yield(proxy) if block_given?
     end
 
+    def schema_file_type(format = ActiveRecord.schema_format)
+      case format
+      when :ruby
+        "schema.rb"
+      when :sql
+        "structure.sql"
+      end
+    end
+
     def initialize(options = {})
-      default_schema = ENV['SCHEMA'] || ActiveRecord::Tasks::DatabaseTasks.schema_file_type(ActiveRecord.schema_format)
+      default_schema = ENV['SCHEMA'] || schema_file_type()
       defaults = {
         :config       => "db/config.yml",
         :migrate_dir  => "db/migrate",
